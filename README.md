@@ -12,3 +12,21 @@
 [![GitHub repo size in bytes](https://img.shields.io/github/repo-size/itning/YunShuShortVideoAppletsServer.svg)](https://github.com/itning/YunShuShortVideoAppletsServer)
 [![HitCount](http://hits.dwyl.io/itning/YunShuShortVideoAppletsServer.svg)](http://hits.dwyl.io/itning/YunShuShortVideoAppletsServer)
 [![language](https://img.shields.io/badge/language-JAVA-green.svg)](https://github.com/itning/YunShuShortVideoAppletsServer)
+
+## 技术栈
+
+1. Spring Boot 2
+2. MyBatis
+3. Spring Session(Redis)
+4. Swagger2
+5. MyBatis PageHelper
+6. Nginx
+7. Docker
+8. Spring Boot Admin
+9. RabbitMQ
+
+项目模块化开发，项目依赖分离，Session集中式管理，扩容简单，支持容器化部署。
+
+使用Spring Actuator 端点监控服务状态，Admin UI界面，应用健康状态一目了然！
+
+使用Swagger API规范化，访问`/swagger-ui.html`即可查看
