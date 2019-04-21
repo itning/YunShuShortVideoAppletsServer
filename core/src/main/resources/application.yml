@@ -1,0 +1,16 @@
+logging:
+  level: debug
+  level.top: debug
+spring:
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+  session:
+    store-type: redis
+    timeout: 10m
+file:
+  face-img-dir: C:\Users\wangn\Desktop\videoTemp\face
+  bgm-dir: C:\Users\wangn\Desktop\videoTemp\bgm
+  video-dir: C:\Users\wangn\Desktop\videoTemp\video
+  ffmpeg-e-x-e-path: F:\IDMDownload\ffmpeg-20190420-3a07aec-win64-static\bin\ffmpeg.exe
