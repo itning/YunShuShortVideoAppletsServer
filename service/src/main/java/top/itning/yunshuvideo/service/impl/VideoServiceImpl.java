@@ -13,8 +13,10 @@ import top.itning.yunshuvideo.common.entity.Comments;
 import top.itning.yunshuvideo.common.entity.Videos;
 import top.itning.yunshuvideo.common.util.FetchVideoCover;
 import top.itning.yunshuvideo.common.util.FileUtils;
+import top.itning.yunshuvideo.common.util.TimeAgoUtils;
 import top.itning.yunshuvideo.common.vo.CommentsVO;
 import top.itning.yunshuvideo.common.vo.VideosVO;
+import top.itning.yunshuvideo.mapper.CommentsMapper;
 import top.itning.yunshuvideo.mapper.CommentsVOMapper;
 import top.itning.yunshuvideo.mapper.VideosMapper;
 import top.itning.yunshuvideo.mapper.VideosVOMapper;
@@ -25,6 +27,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * @author itning
@@ -37,13 +40,15 @@ public class VideoServiceImpl implements VideoService {
     private final VideosMapper videosMapper;
     private final VideosVOMapper videosVOMapper;
     private final CommentsVOMapper commentsVOMapper;
+    private final CommentsMapper commentsMapper;
 
     @Autowired
-    public VideoServiceImpl(FileSpaceConfigProperties fileSpaceConfigProperties, VideosMapper videosMapper, VideosVOMapper videosVOMapper, CommentsVOMapper commentsVOMapper) {
+    public VideoServiceImpl(FileSpaceConfigProperties fileSpaceConfigProperties, VideosMapper videosMapper, VideosVOMapper videosVOMapper, CommentsVOMapper commentsVOMapper, CommentsMapper commentsMapper) {
         this.fileSpaceConfigProperties = fileSpaceConfigProperties;
         this.videosMapper = videosMapper;
         this.videosVOMapper = videosVOMapper;
         this.commentsVOMapper = commentsVOMapper;
+        this.commentsMapper = commentsMapper;
     }
 
     @Override
@@ -78,13 +83,19 @@ public class VideoServiceImpl implements VideoService {
     public void saveComment(UsersDTO usersDTO, Comments comments) {
         comments.setId(UUID.randomUUID().toString().replace("-", ""));
         comments.setCreateTime(new Date());
-
+        comments.setFromUserId(usersDTO.getId());
+        commentsMapper.insertSelective(comments);
     }
 
     @Override
     public PagedResult<List<CommentsVO>> getAllComments(String videoId, int page, int pageSize) {
         PageHelper.startPage(page, pageSize);
-        List<CommentsVO> comments = commentsVOMapper.queryComments(videoId);
+        List<CommentsVO> comments = commentsVOMapper.queryComments(videoId)
+                .stream()
+                .peek(commentsVO -> {
+                    String timeAgo = TimeAgoUtils.format(commentsVO.getCreateTime());
+                    commentsVO.setTimeAgoStr(timeAgo);
+                }).collect(Collectors.toList());
         PageInfo<CommentsVO> pageList = new PageInfo<>(comments);
         PagedResult<List<CommentsVO>> grid = new PagedResult<>();
         grid.setTotal(pageList.getPages());

@@ -130,6 +130,7 @@ public class VideoController {
     public ResponseEntity<?> getVideoComments(@ApiParam(value = "视频ID", required = true) @RequestParam String videoId,
                                               @ApiParam("当前页数") @RequestParam(required = false, defaultValue = "1") int page,
                                               @ApiParam("每页大小") @RequestParam(required = false, defaultValue = "5") int pageSize) {
+        logger.debug("get video comments video id {}", videoId);
         return ResponseEntity.ok(new RestModel<>(videoService.getAllComments(videoId, page, pageSize)));
     }
 }
