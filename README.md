@@ -30,3 +30,7 @@
 使用Spring Actuator 端点监控服务状态，Admin UI界面，应用健康状态一目了然！
 
 使用Swagger API规范化，访问`/swagger-ui.html`即可查看
+
+## 小程序主界面预览
+
+![](https://raw.githubusercontent.com/itning/YunShuShortVideoAppletsServer/master/pic/main.png)
