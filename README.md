@@ -24,6 +24,7 @@
 7. Docker
 8. Spring Boot Admin
 9. RabbitMQ
+10. Zookeeper
 
 项目模块化开发，项目依赖分离，Session集中式管理，扩容简单，支持容器化部署。
 
