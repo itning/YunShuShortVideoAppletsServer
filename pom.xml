@@ -22,7 +22,7 @@
         <java.version>1.8</java.version>
         <spring-boot-version>2.1.7.RELEASE</spring-boot-version>
         <mybatis-spring-boot-starter-version>1.3.2</mybatis-spring-boot-starter-version>
-        <mysql-driver-version>5.1.47</mysql-driver-version>
+        <mysql-driver-version>8.0.16</mysql-driver-version>
         <springfox.version>2.9.2</springfox.version>
         <modelmapper.version>2.3.2</modelmapper.version>
         <start-class>top.itning.yunshuvideo.core.YunShuVideoApplication</start-class>
